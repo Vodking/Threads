@@ -27,10 +27,11 @@ namespace Threads
             ProcessStartInfo cmdStartInfo = new ProcessStartInfo
             {
                 FileName = "cmd.exe",
-                Arguments = "/c {dir}",
+                Arguments = "/c dir",
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
-                UseShellExecute = false
+                UseShellExecute = false,
+                CreateNoWindow = true
             };
 
             Thread cmdThread = new Thread(() =>
@@ -46,12 +47,14 @@ namespace Threads
                     Console.WriteLine("[Поток 2] ", output);
                 }
 
-                
+                Console.WriteLine("[Поток 2] Завершено");
             });
 
             notepadThread.Start();
 
             cmdThread.Start();
+
+            
         }
     }
 }
